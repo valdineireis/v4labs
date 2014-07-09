@@ -1,4 +1,4 @@
-package br.com.valdineireis.v4labs.infra;
+package br.com.valdineireis.v4labs.infra.auth;
 
 import br.com.caelum.vraptor.security.strategy.ShiroInitConfigStrategy;
 import org.apache.shiro.authc.credential.PasswordMatcher;
