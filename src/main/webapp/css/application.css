@@ -26,6 +26,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*
+ * Bootstrap
+ */
+.panel-heading.with-btn h3.panel-title {
+    margin-top: .2em;
+}
+.form-padding {
+    padding: 10px 5px 5px 5px;
+}
+
+/*
  * Footer
  */
 

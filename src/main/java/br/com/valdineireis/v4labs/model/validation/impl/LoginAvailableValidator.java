@@ -1,6 +1,6 @@
 package br.com.valdineireis.v4labs.model.validation.impl;
 
-import br.com.valdineireis.v4labs.dao.UsuarioDAO;
+import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
 import br.com.valdineireis.v4labs.model.Usuario;
 import br.com.valdineireis.v4labs.model.validation.LoginAvailable;
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ public class LoginAvailableValidator
     implements ConstraintValidator<LoginAvailable, Usuario> {
 
     @Inject
-    private UsuarioDAO usuarioDAO;
+    private IUsuarioDAO usuarioDAO;
 
     @Override
     public void initialize(LoginAvailable constraintAnnotation) {

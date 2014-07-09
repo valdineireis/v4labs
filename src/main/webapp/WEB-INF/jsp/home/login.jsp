@@ -32,14 +32,25 @@
     </head>
     <body>
         <div class="container">
-            <form class="form-signin" role="form">
-                <h2 class="form-signin-heading">Informe suas credenciais</h2>
-                <input type="text" class="form-control" placeholder="Login de acesso" required autofocus>
-                <input type="password" class="form-control" placeholder="Senha" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
-            </form>
+            <div class="panel panel-primary form-signin">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Controle de Acesso</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="" role="form">
+                        <input type="text" class="form-control" placeholder="Login de acesso" required autofocus>
+                        <input type="password" class="form-control" placeholder="Senha" required>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Relembre-me
+                            </label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
+                    </form>
+                </div>
+            </div>
         </div> <!-- /container -->
-        
+
         <script src="${PATH}js/jquery.min.js"></script>
         <script src="${PATH}js/bootstrap.min.js"></script>
     </body>

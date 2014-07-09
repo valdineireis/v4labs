@@ -27,6 +27,10 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
+        <script src="${PATH}js/jquery.min.js"></script>
+        <script src="${PATH}js/bootstrap.min.js"></script>
+        <script src="${PATH}js/application.js"></script>
     </head>
     <body>
         <!-- Fixed navbar -->
@@ -42,9 +46,9 @@
                     <a class="navbar-brand" href="javascript:void(0)"><fmt:message key='sistema.nome'/></a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav" id="navbartop">
                         <li class="active"><a href="${PATH}">Dashboard</a></li>
-                        <li><a href="${PATH}usuarios">Usuários</a></li>
+                        <li id="menu-usuarios"><a href="${PATH}usuarios">Usuários</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -79,8 +83,5 @@
                 <a href="#">Voltar para o Topo</a>
             </p>
         </div>
-
-        <script src="${PATH}js/jquery.min.js"></script>
-        <script src="${PATH}js/bootstrap.min.js"></script>
     </body>
 </html>

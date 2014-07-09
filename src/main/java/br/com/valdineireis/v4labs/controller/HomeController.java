@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
 import br.com.valdineireis.v4labs.dao.UsuarioDAO;
 import br.com.valdineireis.v4labs.model.Usuario;
 import javax.inject.Inject;
@@ -28,7 +29,7 @@ public class HomeController {
 
     private Result result;
     private Validator validator;
-    private UsuarioDAO dao;
+    private IUsuarioDAO dao;
     
     private Subject currentUser;
     private Session session;
@@ -46,7 +47,7 @@ public class HomeController {
      * {@link Validator} - all of your CDI classes, e.g {@link DefaultUserDao}
      */
     @Inject
-    public HomeController(UsuarioDAO dao, 
+    public HomeController(IUsuarioDAO dao, 
             Result result, Validator validator, 
             Subject currentUser, Session session,
             PasswordService passwordService) {
