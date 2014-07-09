@@ -11,6 +11,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
 import br.com.valdineireis.v4labs.factory.MessageFactory;
 import br.com.valdineireis.v4labs.model.Usuario;
+import br.com.valdineireis.v4labs.validators.UrlValidator;
 import javax.inject.Inject;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -33,7 +34,8 @@ public class HomeController {
     private Validator validator;
     private IUsuarioDAO dao;
     private MessageFactory messageFactory;
-    
+    private UrlValidator urlValidator;
+
     private Subject currentUser;
     private Session session;
     private PasswordService passwordService;
@@ -50,16 +52,15 @@ public class HomeController {
      * {@link Validator} - all of your CDI classes, e.g {@link DefaultUserDao}
      */
     @Inject
-    public HomeController(IUsuarioDAO dao, 
-            Result result, Validator validator, 
-            Subject currentUser, Session session,
-            PasswordService passwordService,
-            MessageFactory messageFactory) {
+    public HomeController(IUsuarioDAO dao, Result result, Validator validator,
+            Subject currentUser, Session session, PasswordService passwordService,
+            MessageFactory messageFactory, UrlValidator urlValidator) {
         this.dao = dao;
         this.result = result;
         this.validator = validator;
         this.messageFactory = messageFactory;
-        
+        this.urlValidator = urlValidator;
+
         this.currentUser = currentUser;
         this.session = session;
         this.passwordService = passwordService;
@@ -78,9 +79,9 @@ public class HomeController {
      * This method only accept POST requests
      */
     @Post
-    public void login(String login, String password, boolean remember) {
+    public void login(String login, String password, boolean remember, String redirectUrl) {
         String passwordCript = passwordService.encryptPassword(password);
-        
+
         // search for the user in the database
         final Usuario dbUser = dao.busca(login, passwordCript);
 
@@ -90,25 +91,25 @@ public class HomeController {
         validator.check(dbUser != null, new SimpleMessage("login", "invalid_login_or_password"));
 
         // you can use "this" to redirect to another logic from this controller
-        validator.onErrorUsePageOf(this).login();
+        validator.onErrorUsePageOf(this).login(redirectUrl);
 
         // the login was valid, add user to session
         try {
             currentUser.login(new UsernamePasswordToken(login, passwordCript, remember));
 //            session.setAttribute(key, value);
-        } 
-        catch (UnknownAccountException e) {} 
-        catch (IncorrectCredentialsException e) {}
-        catch (LockedAccountException e) {}
-        catch (ExcessiveAttemptsException e) {}
-        catch (AuthenticationException e) {} 
+        } catch (UnknownAccountException e) {
+        } catch (IncorrectCredentialsException e) {
+        } catch (LockedAccountException e) {
+        } catch (ExcessiveAttemptsException e) {
+        } catch (AuthenticationException e) {
+        }
 
         // Apresenta uma mensagem de sucesso para o usuário.
         result.include("success", asList(messageFactory.build("login", "login_success")));
-        
+
         // we don't want to go to default page (/WEB-INF/jsp/home/login.jsp)
         // we want to redirect to the user's home
-        result.redirectTo(IndexController.class).index();
+        redirectToRightUrl(redirectUrl);
     }
 
     /**
@@ -116,10 +117,10 @@ public class HomeController {
      */
     public void logout() {
         currentUser.logout();
-        
+
         // after logging out, we want to be redirected to home index.
         // redirect to another logic from this controller
-        result.redirectTo(this).login();
+        result.redirectTo(this).login(null);
     }
 
     /**
@@ -130,6 +131,21 @@ public class HomeController {
      * This method only accepts GET requests
      */
     @Get("/login")
-    public void login() {
+    public void login(String redirectUrl) {
+        if (redirectUrl != null && !redirectUrl.isEmpty()) {
+            result.include("redirectUrl", redirectUrl);
+        }
+    }
+
+    private void redirectToRightUrl(String redirectUrl) {
+        boolean valid = urlValidator.isValid(redirectUrl);
+        if (!valid) {
+            result.include("warning", asList(messageFactory.build("error", "error.invalid.url", redirectUrl)));
+        }
+        if (redirectUrl != null && !redirectUrl.isEmpty() && valid) {
+            result.redirectTo(redirectUrl);
+        } else {
+            result.redirectTo(IndexController.class).index();
+        }
     }
 }

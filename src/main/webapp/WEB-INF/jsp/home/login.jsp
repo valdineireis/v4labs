@@ -38,11 +38,11 @@
                 </div>
                 <div class="panel-body">
                     <form class="" role="form">
-                        <input type="text" class="form-control" placeholder="Login de acesso" required autofocus>
-                        <input type="password" class="form-control" placeholder="Senha" required>
+                        <input type="text" name="login" class="form-control" placeholder="Login de acesso" required autofocus>
+                        <input type="password" name="password" class="form-control" placeholder="Senha" required>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Relembre-me
+                                <input type="checkbox" name="remember"> Relembre-me
                             </label>
                         </div>
                         <input name="redirectUrl" value="${redirectUrl}" type="hidden" />
