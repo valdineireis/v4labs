@@ -1,0 +1,38 @@
+/* 
+    Created on : 19/06/2014, 18:12:44
+    Author     : Valdinei Reis (valdineimtz@gmail.com)
+*/
+
+/*
+ * Globals
+ */
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #555;
+  padding-top: 70px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  color: #333;
+}
+
+.pageTitle {
+    font-weight: bold;
+    float: right;
+}
+
+/*
+ * Footer
+ */
+
+.app-footer {
+  padding: 40px 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e5e5e5;
+}
