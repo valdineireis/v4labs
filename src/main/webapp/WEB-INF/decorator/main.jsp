@@ -4,6 +4,7 @@
     Author     : Valdinei Reis (valdineimtz@gmail.com) (http://valdineireis.com.br/)
 --%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,20 +18,20 @@
         <title><decorator:title default="<fmt:message key='sistema.nome'/>"/></title>
 
         <!-- Bootstrap core CSS -->
-        <link href="${PATH}css/bootstrap.min.css" rel="stylesheet">
+        <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="${PATH}css/application.css" rel="stylesheet">
+        <link href="<c:url value="/css/application.css"/>" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+          <script src="<c:url value="/js/html5ie8/html5shiv.js"/>"></script>
+          <script src="<c:url value="/js/html5ie8/respond.min.js"/>"></script>
         <![endif]-->
-        
-        <script src="${PATH}js/jquery.min.js"></script>
-        <script src="${PATH}js/bootstrap.min.js"></script>
-        <script src="${PATH}js/application.js"></script>
+
+        <script src="<c:url value="/js/jquery.min.js"/>"></script>
+        <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+        <script src="<c:url value="/js/application.js"/>"></script>
     </head>
     <body>
         <!-- Fixed navbar -->
@@ -72,6 +73,11 @@
         </div>
 
         <div class="container">
+
+            <tags:messages messagesList="${success}" type="success" />
+            <tags:messages messagesList="${info}" type="info" />
+            <tags:messages messagesList="${warning}" type="warning" />
+            <tags:messages messagesList="${errors}" type="danger" />
 
             <decorator:body/>
 

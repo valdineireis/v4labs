@@ -16,18 +16,18 @@
         <title><fmt:message key='sistema.nome'/> [Login]</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="${PATH}css/bootstrap.min.css" rel="stylesheet">
+        <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="${PATH}css/signin.css" rel="stylesheet">
+        <link href="<c:url value="/css/signin.css"/>" rel="stylesheet">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="${PATH}js/ie10-viewport-bug-workaround.js"></script>
+        <script src="<c:url value="/js/ie10-viewport-bug-workaround.js"/>"></script>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-          <script src="${PATH}js/html5ie8/html5shiv.js"></script>
-          <script src="${PATH}js/html5ie8/respond.min.js"></script>
+          <script src="<c:url value="/js/html5ie8/html5shiv.js"/>"></script>
+          <script src="<c:url value="/js/html5ie8/respond.min.js"/>"></script>
         <![endif]-->
     </head>
     <body>
@@ -45,13 +45,14 @@
                                 <input type="checkbox"> Relembre-me
                             </label>
                         </div>
+                        <input name="redirectUrl" value="${redirectUrl}" type="hidden" />
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
                     </form>
                 </div>
             </div>
         </div> <!-- /container -->
 
-        <script src="${PATH}js/jquery.min.js"></script>
-        <script src="${PATH}js/bootstrap.min.js"></script>
+        <script src="<c:url value="/js/jquery.min.js"/>"></script>
+        <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
     </body>
 </html>
