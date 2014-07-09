@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <dataset>
-    <permissao id="1" chave="ADICIONAR-USUARIO" descricao="Adicionar usuário" />
+    <permissao id="1" chave="ADICIONAR-USUARIO" descricao="Adicionar usuário" grupo_id="1" />
 </dataset>

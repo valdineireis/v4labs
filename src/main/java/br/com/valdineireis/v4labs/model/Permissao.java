@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -23,6 +24,9 @@ public class Permissao extends AbstractEntity {
     private String chave;
     
     private String descricao;
+    
+    @ManyToOne
+    private GrupoPermissao grupo;
     
     @ManyToMany(mappedBy = "permissoes")
     private List<Perfil> perfis;
@@ -53,5 +57,13 @@ public class Permissao extends AbstractEntity {
 
     public void setPerfis(List<Perfil> perfis) {
         this.perfis = perfis;
+    }
+
+    public GrupoPermissao getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(GrupoPermissao grupo) {
+        this.grupo = grupo;
     }
 }
