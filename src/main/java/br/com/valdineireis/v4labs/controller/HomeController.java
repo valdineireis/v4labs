@@ -1,5 +1,7 @@
 package br.com.valdineireis.v4labs.controller;
 
+import static java.util.Arrays.asList;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -7,7 +9,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
-import br.com.valdineireis.v4labs.dao.UsuarioDAO;
+import br.com.valdineireis.v4labs.factory.MessageFactory;
 import br.com.valdineireis.v4labs.model.Usuario;
 import javax.inject.Inject;
 import org.apache.shiro.authc.AuthenticationException;
@@ -30,6 +32,7 @@ public class HomeController {
     private Result result;
     private Validator validator;
     private IUsuarioDAO dao;
+    private MessageFactory messageFactory;
     
     private Subject currentUser;
     private Session session;
@@ -50,10 +53,12 @@ public class HomeController {
     public HomeController(IUsuarioDAO dao, 
             Result result, Validator validator, 
             Subject currentUser, Session session,
-            PasswordService passwordService) {
+            PasswordService passwordService,
+            MessageFactory messageFactory) {
         this.dao = dao;
         this.result = result;
         this.validator = validator;
+        this.messageFactory = messageFactory;
         
         this.currentUser = currentUser;
         this.session = session;
@@ -98,6 +103,9 @@ public class HomeController {
         catch (ExcessiveAttemptsException e) {}
         catch (AuthenticationException e) {} 
 
+        // Apresenta uma mensagem de sucesso para o usuário.
+        result.include("success", asList(messageFactory.build("login", "login_success")));
+        
         // we don't want to go to default page (/WEB-INF/jsp/home/login.jsp)
         // we want to redirect to the user's home
         result.redirectTo(IndexController.class).index();
