@@ -10,14 +10,16 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
 import br.com.valdineireis.v4labs.model.Usuario;
 import br.com.valdineireis.v4labs.model.validation.LoginAvailable;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+
 
 /**
  * @author valdineireis
  */
-@Secured
 @Controller
 public class UsuarioController {
     
@@ -25,8 +27,9 @@ public class UsuarioController {
     @Inject private Result result;
     @Inject private Validator validator;
     
-    @Get("/usuarios")
+    @Secured
     @RequiresAuthentication
+    @Get("/usuarios")
     public void index() {
         result.include("entityList", dao.listaTodos());
     }

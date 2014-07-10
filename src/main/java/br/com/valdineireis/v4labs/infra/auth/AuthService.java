@@ -19,12 +19,12 @@ public class AuthService implements Permission {
 
     @Override
     public Set<String> getRolesByUser(String username) {
-        return usuarioDAO.listarPerfilsByUsername(username);
+        return null;// usuarioDAO.listarPerfilsByUsername(username);
     }
 
     @Override
     public Set<String> getPermissionsByRole(String role) {
-        return usuarioDAO.listarPermissoesByPerfil(role);
+        return null;// usuarioDAO.listarPermissoesByPerfil(role);
     }
     
 }

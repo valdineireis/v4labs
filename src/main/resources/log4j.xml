@@ -47,5 +47,10 @@
         <priority value="INFO" />
         <appender-ref ref="main" />
     </category>
+    
+    <category name="org.apache.shiro">
+        <priority value="INFO" />
+        <appender-ref ref="main" />
+    </category>
 
 </log4j:configuration>
