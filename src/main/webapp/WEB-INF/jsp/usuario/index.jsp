@@ -3,6 +3,8 @@
     Created on : 04/07/2014
     Author     : Valdinei Reis (valdineimtz@gmail.com) (http://valdineireis.com.br/)
 --%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+
 <c:set var="titulo_da_pagina" value="Lista de usuários"/>
 
 <head>
@@ -34,8 +36,8 @@
             <tbody>
                 <c:forEach items="${entityList}" var="entity">
                     <tr>
-                        <td>${entity.nome}</td>
-                        <td>${entity.login}</td>
+                        <td>${fn:escapeXml(entity.nome)}</td>
+                        <td>${fn:escapeXml(entity.login)}</td>
                         <td>${entity.ativo ? 'Ativo' : 'Inativo'}</td>
                         <td><a href="${linkTo[UsuarioController].edita(entity.id)}">Editar</a></td>
                     </tr>

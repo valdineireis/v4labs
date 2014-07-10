@@ -11,13 +11,13 @@
     <div class="form-group">
         <label for="nome" class="col-sm-2 control-label">Nome</label>
         <div class="col-sm-10">
-            <input type="text" name="entity.nome" value="${entity.nome}" class="form-control" id="nome" placeholder="Informe o nome do usuário">
+            <input type="text" name="entity.nome" value="${fn:escapeXml(entity.nome)}" class="form-control" id="nome" placeholder="Informe o nome do usuário">
         </div>
     </div>
     <div class="form-group">
         <label for="login" class="col-sm-2 control-label">Login</label>
         <div class="col-sm-10">
-            <input type="text" name="entity.login" value="${entity.login}" class="form-control" id="login" placeholder="Informe o login do usuário">
+            <input type="text" name="entity.login" value="${fn:escapeXml(entity.login)}" class="form-control" id="login" placeholder="Informe o login do usuário">
         </div>
     </div>
     <div class="form-group">
