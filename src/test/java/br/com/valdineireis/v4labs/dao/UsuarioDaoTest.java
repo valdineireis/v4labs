@@ -1,7 +1,5 @@
 package br.com.valdineireis.v4labs.dao;
 
-import br.com.valdineireis.v4labs.dao.UsuarioDAO;
-import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
 import static org.junit.Assert.*;
 
 import java.util.List;
