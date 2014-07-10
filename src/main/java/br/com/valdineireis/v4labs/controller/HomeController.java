@@ -12,7 +12,10 @@ import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
 import br.com.valdineireis.v4labs.factory.MessageFactory;
 import br.com.valdineireis.v4labs.model.Usuario;
 import br.com.valdineireis.v4labs.validators.UrlValidator;
+
 import javax.inject.Inject;
+
+import com.google.common.base.Strings;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -132,7 +135,7 @@ public class HomeController {
      */
     @Get("/login")
     public void login(String redirectUrl) {
-        if (redirectUrl != null && !redirectUrl.isEmpty()) {
+        if (!Strings.isNullOrEmpty(redirectUrl)) {
             result.include("redirectUrl", redirectUrl);
         }
     }
@@ -142,7 +145,7 @@ public class HomeController {
         if (!valid) {
             result.include("warning", asList(messageFactory.build("error", "error.invalid.url", redirectUrl)));
         }
-        if (redirectUrl != null && !redirectUrl.isEmpty() && valid) {
+        if (!Strings.isNullOrEmpty(redirectUrl) && valid) {
             result.redirectTo(redirectUrl);
         } else {
             result.redirectTo(IndexController.class).index();
