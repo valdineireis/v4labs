@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name = "usuario")
 public class Usuario extends AbstractEntity {
-    
+
     private static final long serialVersionUID = 1L;
 
     @NotNull
@@ -34,9 +34,9 @@ public class Usuario extends AbstractEntity {
     @NotNull
     @Length(min = 6, max = 20)
     private String senha;
-    
+
     private boolean ativo;
-    
+
     @ManyToMany
     @JoinTable(name = "usuarios_perfis")
     private List<Perfil> perfis;
