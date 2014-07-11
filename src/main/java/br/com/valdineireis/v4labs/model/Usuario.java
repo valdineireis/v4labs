@@ -1,8 +1,10 @@
 package br.com.valdineireis.v4labs.model;
 
 import br.com.valdineireis.v4labs.model.common.AbstractEntity;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
@@ -10,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -34,12 +37,14 @@ public class Usuario extends AbstractEntity {
     @NotNull
     @Length(min = 6, max = 20)
     private String senha;
+    
+    private String salt;
 
     private boolean ativo;
 
     @ManyToMany
     @JoinTable(name = "usuarios_perfis")
-    private List<Perfil> perfis;
+    private Set<Perfil> perfis;
 
     public Usuario() {
         this("", "", "", false);
@@ -50,7 +55,7 @@ public class Usuario extends AbstractEntity {
         this.login = login;
         this.senha = senha;
         this.ativo = ativo;
-        this.perfis = new ArrayList<>();
+        this.perfis = new HashSet<>();
     }
 
     public String getNome() {
@@ -77,6 +82,14 @@ public class Usuario extends AbstractEntity {
         this.senha = senha;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     public boolean isAtivo() {
         return ativo;
     }
@@ -85,11 +98,11 @@ public class Usuario extends AbstractEntity {
         this.ativo = ativo;
     }
 
-    public List<Perfil> getPerfis() {
+    public Set<Perfil> getPerfis() {
         return perfis;
     }
 
-    public void setPerfis(List<Perfil> perfis) {
+    public void setPerfis(Set<Perfil> perfis) {
         this.perfis = perfis;
     }
 }
