@@ -1,8 +1,10 @@
 package br.com.valdineireis.v4labs.model;
 
 import br.com.valdineireis.v4labs.model.common.AbstractEntity;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -29,10 +31,10 @@ public class Permissao extends AbstractEntity {
     private GrupoPermissao grupo;
     
     @ManyToMany(mappedBy = "permissoes")
-    private List<Perfil> perfis;
+    private Set<Perfil> perfis;
 
     public Permissao() {
-        this.perfis = new ArrayList<>();
+        this.perfis = new HashSet<>();
     }
 
     public String getChave() {
@@ -51,11 +53,11 @@ public class Permissao extends AbstractEntity {
         this.descricao = descricao;
     }
 
-    public List<Perfil> getPerfis() {
+    public Set<Perfil> getPerfis() {
         return perfis;
     }
 
-    public void setPerfis(List<Perfil> perfis) {
+    public void setPerfis(Set<Perfil> perfis) {
         this.perfis = perfis;
     }
 
