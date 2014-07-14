@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <dataset>
-    <perfis_permissoes perfis_id="1" permissoes_id="1" />
+    <perfis_permissoes perfi_id="1" permissao_id="1" />
 </dataset>

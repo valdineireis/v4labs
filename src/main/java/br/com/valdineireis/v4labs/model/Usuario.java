@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -25,25 +27,30 @@ public class Usuario extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     @NotNull
+    @Column(length = 100)
     @Length(min = 3, max = 100)
     private String nome;
 
     @NotNull
-    @Column(unique = true)
-    @Length(min = 3, max = 20)
+    @Column(unique = true, length = 50)
+    @Length(min = 3, max = 50)
     @Pattern(regexp = "[a-z0-9_]+", message = "{invalid_login}")
     private String login;
 
     @NotNull
+    @Column(length = 250)
     @Length(min = 6, max = 20)
     private String senha;
     
+    @Column(length = 100)
     private String salt;
 
     private boolean ativo;
 
-    @ManyToMany
-    @JoinTable(name = "usuarios_perfis")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "usuarios_perfis", 
+            joinColumns = @JoinColumn(name = "usuario_id"), 
+            inverseJoinColumns = @JoinColumn(name = "perfil_id"))
     private Set<Perfil> perfis;
 
     public Usuario() {

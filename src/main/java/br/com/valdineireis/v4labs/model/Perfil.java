@@ -9,6 +9,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -27,8 +29,10 @@ public class Perfil extends AbstractEntity {
     @Column(length = 80, nullable = false)
     private String nome;
     
-    @ManyToMany
-    @JoinTable(name = "perfis_permissoes")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "perfis_permissoes", 
+            joinColumns = @JoinColumn(name = "perfil_id"), 
+            inverseJoinColumns = @JoinColumn(name = "permissao_id"))
     private Set<Permissao> permissoes;
     
     @ManyToMany(mappedBy = "perfis")
