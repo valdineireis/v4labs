@@ -16,7 +16,7 @@ import java.util.Collection;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.validator.SimpleMessage;
-import br.com.valdineireis.v4labs.infra.UserInfo;
+import br.com.valdineireis.v4labs.infra.UserSession;
 
 /**
  *
@@ -33,7 +33,7 @@ public class PermissionInterceptor {
     private IUsuarioDAO usuarioDAO;
 
     @Inject
-    private UserInfo info;
+    private UserSession info;
 
     @AroundCall
     public void around(SimpleInterceptorStack stack, ControllerMethod controllerMethod) {
