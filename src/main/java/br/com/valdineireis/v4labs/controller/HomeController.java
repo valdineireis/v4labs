@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
+import br.com.valdineireis.v4labs.dao.UsuarioDAO;
 import br.com.valdineireis.v4labs.factory.MessageFactory;
 import br.com.valdineireis.v4labs.model.Usuario;
 import br.com.valdineireis.v4labs.validators.UrlValidator;
@@ -16,6 +16,7 @@ import br.com.valdineireis.v4labs.validators.UrlValidator;
 import javax.inject.Inject;
 
 import com.google.common.base.Strings;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -35,7 +36,7 @@ public class HomeController {
 
     private Result result;
     private Validator validator;
-    private IUsuarioDAO dao;
+    private UsuarioDAO dao;
     private MessageFactory messageFactory;
     private UrlValidator urlValidator;
 
@@ -55,7 +56,7 @@ public class HomeController {
      * {@link Validator} - all of your CDI classes, e.g {@link DefaultUserDao}
      */
     @Inject
-    public HomeController(IUsuarioDAO dao, Result result, Validator validator,
+    public HomeController(UsuarioDAO dao, Result result, Validator validator,
             Subject currentUser, Session session, PasswordService passwordService,
             MessageFactory messageFactory, UrlValidator urlValidator) {
         this.dao = dao;

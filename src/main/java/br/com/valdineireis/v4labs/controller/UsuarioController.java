@@ -7,7 +7,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.security.annotation.Secured;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
+import br.com.valdineireis.v4labs.dao.UsuarioDAO;
 import br.com.valdineireis.v4labs.model.Usuario;
 import br.com.valdineireis.v4labs.model.validation.LoginAvailable;
 
@@ -23,7 +23,7 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 @Controller
 public class UsuarioController {
     
-    @Inject private IUsuarioDAO dao;
+    @Inject private UsuarioDAO dao;
     @Inject private Result result;
     @Inject private Validator validator;
     

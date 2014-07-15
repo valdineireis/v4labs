@@ -23,7 +23,7 @@ public class UsuarioDaoTest {
 
     private final JIntegrity helper = new JIntegrity();
 
-    private IUsuarioDAO dao;
+    private UsuarioDAO dao;
 
     @BeforeClass
     public static void setUpClass() {
@@ -36,7 +36,7 @@ public class UsuarioDaoTest {
 
         helper.cleanAndInsert();
 
-        this.dao = new UsuarioDAO(JPAHelper.currentEntityManager());
+        this.dao = new JPAUsuarioDAO(JPAHelper.currentEntityManager());
     }
 
     @After

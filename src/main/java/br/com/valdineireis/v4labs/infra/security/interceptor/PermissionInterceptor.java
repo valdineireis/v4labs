@@ -7,7 +7,7 @@ import br.com.caelum.vraptor.controller.ControllerMethod;
 import br.com.caelum.vraptor.interceptor.AcceptsWithAnnotations;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 import br.com.caelum.vraptor.view.Results;
-import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
+import br.com.valdineireis.v4labs.dao.UsuarioDAO;
 import br.com.valdineireis.v4labs.infra.security.annotation.Permission;
 
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class PermissionInterceptor {
     private Result result;
 
     @Inject
-    private IUsuarioDAO usuarioDAO;
+    private UsuarioDAO usuarioDAO;
 
     @Inject
     private UserSession info;
