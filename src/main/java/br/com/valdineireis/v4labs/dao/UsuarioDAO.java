@@ -1,12 +1,16 @@
 package br.com.valdineireis.v4labs.dao;
 
 import br.com.valdineireis.v4labs.model.Usuario;
+
 import java.util.List;
 import java.util.Set;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 
 /**
@@ -91,8 +95,21 @@ public class UsuarioDAO implements IUsuarioDAO {
         return count > 0;
     }
 
-    private Session getSession() {
-        return em.unwrap(Session.class);
+    public boolean isPermissionExist(Usuario entity, String permissao) {
+        /*
+         select perfil.id from Perfil perfil inner join PerfilPermissao pp 
+         on (perfil.id = pp.idPerfil) inner join Permissao permissao 
+         on (pp.idPermissao = permissao.id) 
+         where perfil.id = :id and permissao.chave like :permissao
+         */
+        try {
+            Query query = em.createQuery("select usuario.id from " + Usuario.class.getName() + " usuario join usuario.perfil join usuario.perfil.permissoes permissoes where usuario.id = :id and :permissao in permissoes.chave");
+            query.setParameter("permissao", permissao);
+            query.setParameter("id", entity.getId());
+            return (query.getSingleResult() != null);
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 
     public Usuario selecionarUsuarioByUsername(String username) {
@@ -105,5 +122,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 
     public Set<String> listarPermissoesByPerfil(String role) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private Session getSession() {
+        return em.unwrap(Session.class);
     }
 }

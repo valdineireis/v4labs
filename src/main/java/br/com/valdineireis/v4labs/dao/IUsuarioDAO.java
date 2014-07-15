@@ -56,6 +56,9 @@ public interface IUsuarioDAO {
      */
     boolean contemUsuarioComLogin(String login);
     
+    boolean isPermissionExist(Usuario entity, String permissao);
+    
+    
     Usuario selecionarUsuarioByUsername(String username);
     
     Set<String> listarPerfilsByUsername(String username);
