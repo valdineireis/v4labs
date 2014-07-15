@@ -1,4 +1,4 @@
-package br.com.valdineireis.v4labs.infra.interceptor;
+package br.com.valdineireis.v4labs.infra.security.interceptor;
 
 import br.com.caelum.vraptor.AroundCall;
 import br.com.caelum.vraptor.Intercepts;
@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.interceptor.AcceptsWithAnnotations;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 import br.com.caelum.vraptor.view.Results;
 import br.com.valdineireis.v4labs.dao.IUsuarioDAO;
-import br.com.valdineireis.v4labs.infra.annotation.Permission;
+import br.com.valdineireis.v4labs.infra.security.annotation.Permission;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,7 +16,7 @@ import java.util.Collection;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.validator.SimpleMessage;
-import br.com.valdineireis.v4labs.infra.UserSession;
+import br.com.valdineireis.v4labs.infra.security.UserSession;
 
 /**
  *

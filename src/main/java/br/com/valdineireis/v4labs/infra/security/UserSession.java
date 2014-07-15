@@ -1,4 +1,4 @@
-package br.com.valdineireis.v4labs.infra;
+package br.com.valdineireis.v4labs.infra.security;
 
 import java.io.Serializable;
 
