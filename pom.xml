@@ -66,13 +66,6 @@
             <scope>provided</scope>
         </dependency>
         
-        <!--Support to Security-->
-        <dependency>
-            <groupId>br.com.caelum.vraptor</groupId>
-            <artifactId>vraptor-shiro</artifactId>
-            <version>4.0.0-RC2</version>
-        </dependency>
-        
         <!-- Gerenciador de páginas WEB, permitindo a 
         fácil inclusão de paǵinas jsp -->
         <dependency>
