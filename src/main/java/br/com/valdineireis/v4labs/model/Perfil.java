@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -35,7 +36,7 @@ public class Perfil extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "permissao_id"))
     private Set<Permissao> permissoes;
     
-    @ManyToMany(mappedBy = "perfis")
+    @OneToMany(mappedBy = "perfil")
     private List<Usuario> usuarios;
 
     public Perfil() {

@@ -1,5 +1,6 @@
 package br.com.valdineireis.v4labs.helper;
 
+import br.com.valdineireis.v4labs.model.Perfil;
 import br.com.valdineireis.v4labs.model.Usuario;
 
 /**
@@ -9,17 +10,19 @@ import br.com.valdineireis.v4labs.model.Usuario;
 public class UsuarioHelperTest {
 
     public static Usuario Novo(String nome, String login) {
-        return Novo(0L, nome, login, true);
+        return Novo(0L, nome, login, true, null);
     }
     
-    public static Usuario Novo(Long id, String nome, String login, boolean ativo) {
+    public static Usuario Novo(Long id, String nome, String login, boolean ativo, Perfil perfil) {
         Usuario usuario = new Usuario();
 
         usuario.setId(id);
         usuario.setNome(nome);
         usuario.setLogin(login);
-        usuario.setSenha(login + id);
+        usuario.setSenha(login + "123");
         usuario.setAtivo(ativo);
+        usuario.setPerfil(perfil);
+        usuario.setSalt("");
 
         return usuario;
     }

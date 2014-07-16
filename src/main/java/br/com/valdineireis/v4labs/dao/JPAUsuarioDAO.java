@@ -3,7 +3,6 @@ package br.com.valdineireis.v4labs.dao;
 import br.com.valdineireis.v4labs.model.Usuario;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -111,18 +110,6 @@ public class JPAUsuarioDAO implements UsuarioDAO {
         } catch (NoResultException e) {
             return false;
         }
-    }
-
-    public Usuario selecionarUsuarioByUsername(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Set<String> listarPerfilsByUsername(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Set<String> listarPermissoesByPerfil(String role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private Session getSession() {

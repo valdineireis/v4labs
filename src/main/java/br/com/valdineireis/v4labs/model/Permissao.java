@@ -22,7 +22,7 @@ public class Permissao extends AbstractEntity {
     private static final long serialVersionUID = 1L;
     
     @NotNull
-    @Column(unique = true)
+    @Column(unique = true, length = 100)
     private String chave;
     
     private String descricao;

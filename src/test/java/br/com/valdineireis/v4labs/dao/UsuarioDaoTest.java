@@ -47,7 +47,8 @@ public class UsuarioDaoTest {
     @Test
     public void deveriaBuscarPorLoginESenha() {
         // given
-        Usuario joao = UsuarioHelperTest.Novo(1l, "João", "joao", true);
+//        Perfil perfil = new Perfil();
+        Usuario joao = UsuarioHelperTest.Novo(1l, "João", "joao", true, null);
 
         // when
         Usuario esperado = dao.busca(joao.getLogin(), joao.getSenha());
@@ -59,7 +60,7 @@ public class UsuarioDaoTest {
     @Test
     public void deveriaRetornarNullAoBuscarPorLoginESenha() {
         // given
-        Usuario jose = UsuarioHelperTest.Novo(1l, "José", "jose", true);
+        Usuario jose = UsuarioHelperTest.Novo("José", "jose");
 
         // when
         Usuario esperado = dao.busca(jose.getLogin(), jose.getSenha());
@@ -105,8 +106,8 @@ public class UsuarioDaoTest {
         // then
         assertEquals("deve retornar a quantidade correta de registros", 2, entityList.size());
 
-        verifyEntities(UsuarioHelperTest.Novo(1l, "João", "joao", true), entityList.get(0));
-        verifyEntities(UsuarioHelperTest.Novo(2l, "Maria", "maria", false), entityList.get(1));
+        verifyEntities(UsuarioHelperTest.Novo(1l, "João", "joao", true, null), entityList.get(0));
+        verifyEntities(UsuarioHelperTest.Novo(2l, "Maria", "maria", false, null), entityList.get(1));
     }
 
     @Test
@@ -117,8 +118,8 @@ public class UsuarioDaoTest {
         Usuario maria = dao.buscarPorId(2l);
 
         // then
-        verifyEntities(UsuarioHelperTest.Novo(1l, "João", "joao", true), joao);
-        verifyEntities(UsuarioHelperTest.Novo(2l, "Maria", "maria", false), maria);
+        verifyEntities(UsuarioHelperTest.Novo(1l, "João", "joao", true, null), joao);
+        verifyEntities(UsuarioHelperTest.Novo(2l, "Maria", "maria", false, null), maria);
     }
     
     @Test
@@ -136,6 +137,7 @@ public class UsuarioDaoTest {
         assertEquals("deve ter o mesmo nome", expected.getNome(), found.getNome());
         assertEquals("deve ter a mesma senha", expected.getSenha(), found.getSenha());
         assertEquals("deve ter o mesmo status", expected.isAtivo(), found.isAtivo());
+        assertEquals("deve ter o mesmo salt", expected.getSalt(), found.getSalt());
     }
 
 }
