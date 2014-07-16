@@ -12,20 +12,11 @@ import br.com.valdineireis.v4labs.dao.UsuarioDAO;
 import br.com.valdineireis.v4labs.factory.MessageFactory;
 import br.com.valdineireis.v4labs.model.Usuario;
 import br.com.valdineireis.v4labs.validators.UrlValidator;
+import br.com.valdineireis.v4labs.infra.security.UserSession;
 
 import javax.inject.Inject;
 
 import com.google.common.base.Strings;
-
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.credential.PasswordService;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 
 /**
  *
@@ -39,10 +30,7 @@ public class HomeController {
     private UsuarioDAO dao;
     private MessageFactory messageFactory;
     private UrlValidator urlValidator;
-
-    private Subject currentUser;
-    private Session session;
-    private PasswordService passwordService;
+    private UserSession userSession;
 
     //CDI eyes only
     @Deprecated
@@ -54,20 +42,22 @@ public class HomeController {
      * dependencies, this class will be created with no problem. You can use as
      * dependencies: - all VRaptor components, e.g {@link Result} and
      * {@link Validator} - all of your CDI classes, e.g {@link DefaultUserDao}
+     * @param dao UsuarioDAO
+     * @param result
+     * @param validator
+     * @param userSession
+     * @param messageFactory
+     * @param urlValidator
      */
     @Inject
-    public HomeController(UsuarioDAO dao, Result result, Validator validator,
-            Subject currentUser, Session session, PasswordService passwordService,
-            MessageFactory messageFactory, UrlValidator urlValidator) {
+    public HomeController(UsuarioDAO dao, Result result, Validator validator, 
+            UserSession userSession, MessageFactory messageFactory, UrlValidator urlValidator) {
         this.dao = dao;
         this.result = result;
         this.validator = validator;
         this.messageFactory = messageFactory;
         this.urlValidator = urlValidator;
-
-        this.currentUser = currentUser;
-        this.session = session;
-        this.passwordService = passwordService;
+        this.userSession = userSession;
     }
 
     /**
@@ -81,13 +71,15 @@ public class HomeController {
      * VRaptor will call: homeController.login("john", "nobodyknows");
      *
      * This method only accept POST requests
+     * @param login
+     * @param password
+     * @param remember
+     * @param redirectUrl
      */
     @Post
     public void login(String login, String password, boolean remember, String redirectUrl) {
-        String passwordCript = passwordService.encryptPassword(password);
-
         // search for the user in the database
-        final Usuario dbUser = dao.busca(login, passwordCript);
+        final Usuario dbUser = dao.busca(login, password);
 
         // if no user is found, adds an error message to the validator
         // "invalid_login_or_password" is the message key from messages.properties,
@@ -98,15 +90,7 @@ public class HomeController {
         validator.onErrorUsePageOf(this).login(redirectUrl);
 
         // the login was valid, add user to session
-        try {
-            currentUser.login(new UsernamePasswordToken(login, passwordCript, remember));
-//            session.setAttribute(key, value);
-        } catch (UnknownAccountException e) {
-        } catch (IncorrectCredentialsException e) {
-        } catch (LockedAccountException e) {
-        } catch (ExcessiveAttemptsException e) {
-        } catch (AuthenticationException e) {
-        }
+        userSession.login(dbUser);
 
         // Apresenta uma mensagem de sucesso para o usuário.
         result.include("success", asList(messageFactory.build("login", "login_success")));
@@ -120,7 +104,7 @@ public class HomeController {
      * Using the convention, the URI for this method is /home/logout
      */
     public void logout() {
-        currentUser.logout();
+        userSession.logout();
 
         // after logging out, we want to be redirected to home index.
         // redirect to another logic from this controller
@@ -133,6 +117,7 @@ public class HomeController {
      * which will be redirected to jsp /WEB-INF/jsp/home/login.jsp
      *
      * This method only accepts GET requests
+     * @param redirectUrl
      */
     @Get("/login")
     public void login(String redirectUrl) {
