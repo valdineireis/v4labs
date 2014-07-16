@@ -49,6 +49,11 @@ public class PermissionInterceptor {
         }
     }
 
+    /**
+     * Extrai as Permissões que estão na anotação Permission
+     * @param permission Permissões
+     * @return 
+     */
     private boolean hasAccess(Permission permission) {
 
         if (permission == null) {
@@ -60,6 +65,11 @@ public class PermissionInterceptor {
         return verifyPermission(permissoes);
     }
 
+    /**
+     * Verifica se o usuário logado no sistema tem permissão de acesso
+     * @param permissoes Lista de Permissões
+     * @return 
+     */
     private boolean verifyPermission(Collection<String> permissoes) {
         for (String permissao : permissoes) {
             if (usuarioDAO.isPermissionExist(info.getUser(), permissao)) {
