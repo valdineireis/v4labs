@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <dataset>
-    <usuario id="1" login="joao" nome="João" senha="joao1" ativo="1" />
-    <usuario id="2" login="maria" nome="Maria" senha="maria2" ativo="0" />
+    <usuario id="1" login="joao" nome="João" senha="joao1" ativo="1" salt="" perfil_id="1" />
+    <usuario id="2" login="maria" nome="Maria" senha="maria2" ativo="0" salt="" perfil_id="2" />
 </dataset>

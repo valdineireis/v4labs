@@ -2,4 +2,5 @@
 
 <dataset>
     <perfil id="1" nome="Administrador" />
+    <perfil id="2" nome="Atendente" />
 </dataset>

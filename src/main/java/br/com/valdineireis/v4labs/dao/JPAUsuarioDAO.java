@@ -95,6 +95,7 @@ public class JPAUsuarioDAO implements UsuarioDAO {
         return count > 0;
     }
 
+    @Override
     public boolean isPermissionExist(Usuario entity, String permissao) {
         /*
          select perfil.id from Perfil perfil inner join PerfilPermissao pp 

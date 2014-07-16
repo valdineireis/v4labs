@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -46,23 +47,20 @@ public class Usuario extends AbstractEntity {
     private String salt;
 
     private boolean ativo;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "usuarios_perfis", 
-            joinColumns = @JoinColumn(name = "usuario_id"), 
-            inverseJoinColumns = @JoinColumn(name = "perfil_id"))
-    private Set<Perfil> perfis;
+    
+    @OneToMany(fetch = FetchType.LAZY)
+    private Perfil perfil;
 
     public Usuario() {
-        this("", "", "", false);
+        this("", "", "", false, null);
     }
 
-    public Usuario(String nome, String login, String senha, boolean ativo) {
+    public Usuario(String nome, String login, String senha, boolean ativo, Perfil perfil) {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
         this.ativo = ativo;
-        this.perfis = new HashSet<>();
+        this.perfil = perfil;
     }
 
     public String getNome() {
@@ -105,11 +103,11 @@ public class Usuario extends AbstractEntity {
         this.ativo = ativo;
     }
 
-    public Set<Perfil> getPerfis() {
-        return perfis;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
-    public void setPerfis(Set<Perfil> perfis) {
-        this.perfis = perfis;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 }
