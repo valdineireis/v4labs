@@ -43,9 +43,6 @@ public class AbstractEntity implements java.io.Serializable {
             return false;
         }
         final AbstractEntity other = (AbstractEntity) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 }
