@@ -1,8 +1,8 @@
 package br.com.valdineireis.v4labs.dao;
 
-import br.com.valdineireis.v4labs.model.Usuario;
+import java.util.Collection;
 
-import java.util.List;
+import br.com.valdineireis.v4labs.model.Usuario;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -50,7 +50,7 @@ public class JPAUsuarioDAO extends JPAGenericDAO<Usuario> implements UsuarioDAO 
     }
 
     @Override
-    public List<Usuario> listaTodos() {
+    public Collection<Usuario> listaTodos() {
         return em.createQuery("select u from " + Usuario.class.getName() + " u order by u.nome").getResultList();
     }
 

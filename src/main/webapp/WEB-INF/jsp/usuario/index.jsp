@@ -3,8 +3,6 @@
     Created on : 04/07/2014
     Author     : Valdinei Reis (valdineimtz@gmail.com) (http://valdineireis.com.br/)
 --%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-
 <c:set var="titulo_da_pagina" value="Lista de usuários"/>
 
 <head>

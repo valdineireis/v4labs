@@ -42,5 +42,5 @@ public interface GenericDAO<T extends AbstractEntity> {
      * Atualiza o objeto no banco de dados
      * @param entity 
      */
-    void atualiza(T entity);
+    void atualiza(T entity) throws CommonException;
 }

@@ -84,7 +84,7 @@
         </div> <!-- /container -->
 
         <div class="app-footer">
-            <p>Desenvolvido por <a href="http://valdineireis.com.br">valdineireis</a>.</p>
+            <p>Desenvolvido por <a href="http://valdineireis.com.br" target="_blank">valdineireis</a>.</p>
             <p>
                 <a href="#">Voltar para o Topo</a>
             </p>

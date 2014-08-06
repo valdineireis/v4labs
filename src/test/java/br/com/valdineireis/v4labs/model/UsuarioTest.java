@@ -18,6 +18,6 @@ public class UsuarioTest {
         assertEquals("A senha deve estar em branco", "", novo.getSenha());
         assertFalse("Deve estar inativo (false)", novo.isAtivo());
         assertEquals("Não deve ter perfis", null, novo.getPerfil());
-        assertEquals("Não deve ter salt", "", novo.getSalt());
+        assertEquals("Não deve ter salt", null, novo.getSalt());
     }
 }

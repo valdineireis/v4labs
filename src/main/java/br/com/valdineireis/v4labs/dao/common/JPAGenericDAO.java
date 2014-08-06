@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import br.com.valdineireis.v4labs.exception.CommonException;
-import br.com.valdineireis.v4labs.model.Usuario;
 import br.com.valdineireis.v4labs.model.common.AbstractEntity;
 
 /**
@@ -62,7 +61,7 @@ public abstract class JPAGenericDAO<T extends AbstractEntity> implements Generic
     }
 
     @Override
-    public void atualiza(T entity) {
+    public void atualiza(T entity) throws CommonException {
         em.merge(entity);
     }
 
