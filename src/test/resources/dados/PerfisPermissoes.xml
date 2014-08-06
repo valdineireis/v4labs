@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <dataset>
-    <perfis_permissoes perfi_id="1" permissao_id="1" />
-    <perfis_permissoes perfi_id="1" permissao_id="2" />
-    <perfis_permissoes perfi_id="2" permissao_id="2" />
+    <perfis_permissoes perfil_id="1" permissao_id="1" />
+    <perfis_permissoes perfil_id="1" permissao_id="2" />
+    <perfis_permissoes perfil_id="2" permissao_id="2" />
 </dataset>

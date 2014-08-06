@@ -56,7 +56,6 @@ public class Usuario extends AbstractEntity {
         this.senha = senha;
         this.ativo = ativo;
         this.perfil = perfil;
-        this.salt = "";
     }
 
     public String getNome() {

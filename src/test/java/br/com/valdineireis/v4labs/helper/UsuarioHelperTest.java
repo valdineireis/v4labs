@@ -22,7 +22,6 @@ public class UsuarioHelperTest {
         usuario.setSenha(login + "123");
         usuario.setAtivo(ativo);
         usuario.setPerfil(perfil);
-        usuario.setSalt("");
 
         return usuario;
     }

@@ -81,21 +81,6 @@ public class UsuarioDaoTest {
         assertNull("Não deve encontrar o usuário José", esperado);
     }
 
-//    @Test
-//    public void deveriaAdicionarUmNovoUsuario() {
-//        // given
-//        Usuario entity = new Usuario("José", "jose", "jose3", true);
-//
-//        // when
-//        dao.adiciona(entity);
-//        List<Usuario> entityList = dao.listaTodos();
-//
-//        // then
-//        assertEquals("deve retornar a quantidade correta de registros", 3, entityList.size());
-//
-//        verifyEntities(UsuarioHelperTest.Novo(3l, "José", "jose", true), entityList.get(2));
-//    }
-
     @Test
     public void deveriaListarTodos() {
         // given
