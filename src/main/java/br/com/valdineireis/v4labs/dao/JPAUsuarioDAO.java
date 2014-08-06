@@ -7,41 +7,25 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
+
+import br.com.valdineireis.v4labs.dao.common.JPAGenericDAO;
 
 /**
  * @author valdineireis
  */
 @Stateless
-public class JPAUsuarioDAO implements UsuarioDAO {
-
-    /**
-     * No arquivo persistence.xml contém 2 persistence unit, um para ambiente de
-     * produção, e outro para testes. Aqui devemos selecionar o de produção que
-     * é o default.
-     */
-    @PersistenceContext(unitName = "default")
-    private EntityManager em;
+public class JPAUsuarioDAO extends JPAGenericDAO<Usuario> implements UsuarioDAO {
 
     @Deprecated // CDI eyes only
     public JPAUsuarioDAO() {
+        this(null);
     }
 
     public JPAUsuarioDAO(EntityManager em) {
-        this.em = em;
-    }
-
-    @Override
-    public void adiciona(Usuario usuario) {
-        em.persist(usuario);
-    }
-
-    @Override
-    public void atualiza(Usuario usuario) {
-        em.merge(usuario);
+        super(em);
     }
 
     @Override
@@ -58,20 +42,6 @@ public class JPAUsuarioDAO implements UsuarioDAO {
                             + " u where u.ativo = true and u.login = :login and u.senha = :password", Usuario.class)
                     .setParameter("login", login)
                     .setParameter("password", password)
-                    .getSingleResult();
-            return user;
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
-
-    @Override
-    public Usuario buscarPorId(long id) {
-        try {
-            Usuario user = em
-                    .createQuery("select u from " + Usuario.class.getName()
-                            + " u where u.id = :id", Usuario.class)
-                    .setParameter("id", id)
                     .getSingleResult();
             return user;
         } catch (NoResultException e) {

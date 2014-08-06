@@ -99,8 +99,8 @@ public class UsuarioDaoTest {
     public void deveriaBuscarUsuarioPorId() {
 
         // when
-        Usuario joao = dao.buscarPorId(1l);
-        Usuario maria = dao.buscarPorId(2l);
+        Usuario joao = (Usuario) dao.buscarPorId(1l);
+        Usuario maria = (Usuario) dao.buscarPorId(2l);
 
         // then
         verifyEntities(UsuarioHelperTest.Novo(1l, "João", "joao", true, null), joao);
