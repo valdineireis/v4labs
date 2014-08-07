@@ -11,13 +11,13 @@
     <div class="form-group">
         <label for="nome" class="col-sm-2 control-label">Nome</label>
         <div class="col-sm-3">
-            <input type="text" name="entity.nome" value="${fn:escapeXml(entity.nome)}" class="form-control" id="nome" placeholder="Informe o nome do usuário">
+            <input type="text" maxlength="100" name="entity.nome" value="${fn:escapeXml(entity.nome)}" class="form-control" id="nome" placeholder="Informe o nome do usuário">
         </div>
     </div>
     <div class="form-group">
         <label for="login" class="col-sm-2 control-label">Login</label>
         <div class="col-sm-3">
-            <input type="text" name="entity.login" value="${fn:escapeXml(entity.login)}" class="form-control" id="login" placeholder="Informe o login do usuário">
+            <input type="text" maxlength="50" name="entity.login" value="${fn:escapeXml(entity.login)}" class="form-control" id="login" placeholder="Informe o login do usuário">
         </div>
     </div>
     <div class="form-group">
@@ -29,8 +29,12 @@
     <div class="form-group">
         <label for="perfil" class="col-sm-2 control-label">Perfil</label>
         <div class="col-sm-3">
-            <select class="form-control" id="perfil" name="entity.perfil">
+            <select class="form-control" id="perfil" name="entity.perfil.id">
                 <option>- SELECIONE -</option>
+                <c:forEach items="${perfis}" var="p">
+                    <c:set var="selected" value="${p.id eq entity.perfil.id ? 'selected' : ''}"/>
+                    <option value="${p.id}" ${selected}>${p.nome}</option>
+                </c:forEach>
             </select>
         </div>
     </div>

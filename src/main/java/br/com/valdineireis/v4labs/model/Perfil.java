@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
 public class Perfil extends AbstractEntity {
     private static final long serialVersionUID = 1L;
     
-    @NotNull
+    @NotNull(message = "{perfil.nome.notNull}")
     @Column(length = 80, nullable = false)
     private String nome;
     

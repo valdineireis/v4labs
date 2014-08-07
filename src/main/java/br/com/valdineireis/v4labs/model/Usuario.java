@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,7 +25,7 @@ public class Usuario extends AbstractEntity {
 
     @NotNull(message = "{usuario.nome.notNull}")
     @Column(length = 100)
-    @Length(min = 3, max = 100)
+    @Length(min = 3, max = 100, message = "{usuario.nome.tamanho}")
     private String nome;
 
     @NotNull(message = "{usuario.login.notNull}")
@@ -43,8 +44,7 @@ public class Usuario extends AbstractEntity {
 
     private boolean ativo;
     
-    @NotNull(message = "{usuario.perfil.notNull}")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Perfil perfil;
 
     public Usuario() {

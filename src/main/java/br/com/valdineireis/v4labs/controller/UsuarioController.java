@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import br.com.valdineireis.v4labs.dao.PerfilDAO;
 import br.com.valdineireis.v4labs.exception.CommonException;
 import br.com.valdineireis.v4labs.factory.MessageFactory;
 
@@ -26,6 +27,7 @@ import br.com.valdineireis.v4labs.factory.MessageFactory;
 public class UsuarioController {
     
     @Inject private UsuarioDAO dao;
+    @Inject private PerfilDAO perfilDAO;
     @Inject private Result result;
     @Inject private Validator validator;
     @Inject private MessageFactory messageFactory;
@@ -36,40 +38,40 @@ public class UsuarioController {
     }
     
     public void novo(Usuario usuario) {
-        result.include("usuario", usuario);
+        result.include("usuario", usuario)
+              .include("perfis", perfilDAO.listaTodos());
     }
 
     @Post("/usuario/salva")
     public void adiciona(@NotNull @Valid @LoginAvailable Usuario entity) {
-        validator.onErrorUsePageOf(this).novo(entity);
+        validator.onErrorRedirectTo(this).novo(entity);
         
         try {
             dao.adiciona(entity);
             result.include("success", asList(messageFactory.build("Usuario", "cadastro.sucesso")));
             result.redirectTo(this).index();
         } catch (CommonException ex) {
-            result.include("errors", asList(messageFactory.build("Usuario", "atualizacao.sucesso")));
+            result.include("errors", asList(messageFactory.build("Usuario", ex.getMessage())));
             result.redirectTo(this).novo(entity);
         }
     }
     
     @Get("/usuario/{id}")
     public void edita(long id) {
-        result.include("entity", dao.buscarPorId(id));
+        result.include("entity", dao.buscarPorId(id))
+              .include("perfis", perfilDAO.listaTodos());
     }
     
     @Put("/usuario/salva")
     public void atualiza(@NotNull @Valid Usuario entity) {
-        validator.onErrorUsePageOf(this).edita(entity.getId());
-        
-        entity.setPerfil(null);
+        validator.onErrorRedirectTo(this).edita(entity.getId());
         
         try {
             dao.atualiza(entity);
-            result.include("success", asList(messageFactory.build("Usuario", "cadastro.sucesso")));
+            result.include("success", asList(messageFactory.build("Usuario", "atualizacao.sucesso")));
             result.redirectTo(this).index();
         } catch (CommonException ex) {
-            result.include("errors", asList(messageFactory.build("Usuario", "atualizacao.sucesso")));
+            result.include("errors", asList(messageFactory.build("Usuario", ex.getMessage())));
             result.redirectTo(this).novo(entity);
         }
     }
