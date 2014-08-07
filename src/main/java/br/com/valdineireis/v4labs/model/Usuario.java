@@ -44,8 +44,7 @@ public class Usuario extends AbstractEntity {
     private boolean ativo;
     
     @NotNull(message = "{usuario.perfil.notNull}")
-    @Column(nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Perfil perfil;
 
     public Usuario() {
