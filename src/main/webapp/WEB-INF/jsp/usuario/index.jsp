@@ -27,6 +27,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Login</th>
+                    <th>Perfil</th>
                     <th>Status</th>
                     <th></th>
                 </tr>
@@ -36,6 +37,7 @@
                     <tr>
                         <td>${fn:escapeXml(entity.nome)}</td>
                         <td>${fn:escapeXml(entity.login)}</td>
+                        <td>${fn:escapeXml(entity.perfil.nome)}</td>
                         <td>${entity.ativo ? 'Ativo' : 'Inativo'}</td>
                         <td><a href="${linkTo[UsuarioController].edita(entity.id)}">Editar</a></td>
                     </tr>
