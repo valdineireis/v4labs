@@ -18,18 +18,8 @@
         <appender-ref ref="main"/>
     </category>
     
-    <category name="br.com.valdineireis">
-        <priority value="INFO"/>
-        <appender-ref ref="main"/>
-    </category>
-    
     <category name="org.hibernate">
         <priority value="WARN"/>
-        <appender-ref ref="main"/>
-    </category>
-    
-    <category name="org.jboss.weld">
-        <priority value="INFO"/>
         <appender-ref ref="main"/>
     </category>
 
@@ -44,11 +34,6 @@
     </category>
 
     <category name="com.jintegrity.vendor.MySqlDbUnitManager">
-        <priority value="INFO" />
-        <appender-ref ref="main" />
-    </category>
-    
-    <category name="org.apache.shiro">
         <priority value="INFO" />
         <appender-ref ref="main" />
     </category>
