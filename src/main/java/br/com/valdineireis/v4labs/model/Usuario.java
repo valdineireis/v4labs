@@ -22,20 +22,20 @@ public class Usuario extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
+    @NotNull(message = "{usuario.nome.notNull}")
     @Column(length = 100)
     @Length(min = 3, max = 100)
     private String nome;
 
-    @NotNull
+    @NotNull(message = "{usuario.login.notNull}")
     @Column(unique = true, length = 50)
-    @Length(min = 3, max = 50)
+    @Length(min = 3, max = 50, message = "{usuario.login.tamanho}")
     @Pattern(regexp = "[a-z0-9_]+", message = "{invalid_login}")
     private String login;
 
-    @NotNull
+    @NotNull(message = "{usuario.senha.notNull}")
     @Column(length = 150)
-    @Min(value = 6)
+    @Min(value = 6, message = "{usuario.senha.tamanhoMinimo}")
     private String senha;
     
     @Column(length = 100)
@@ -43,6 +43,8 @@ public class Usuario extends AbstractEntity {
 
     private boolean ativo;
     
+    @NotNull(message = "{usuario.perfil.notNull}")
+    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Perfil perfil;
 

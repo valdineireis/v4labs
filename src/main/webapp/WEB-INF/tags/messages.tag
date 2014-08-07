@@ -9,7 +9,7 @@
         <ul>
             <c:forEach var="message" items="${messagesList}">
                 <li class="message ${message.category}">${message.message}</li>
-                </c:forEach>
+            </c:forEach>
         </ul>
     </div>
 </c:if>
