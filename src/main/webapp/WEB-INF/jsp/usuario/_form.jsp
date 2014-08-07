@@ -3,7 +3,7 @@
     Created on : 04/07/2014
     Author     : Valdinei Reis (valdineimtz@gmail.com) (http://valdineireis.com.br/)
 --%>
-<form action="${PATH}usuario/salva" method="post" class="form-horizontal form-padding" role="form">
+<form id="form-usuario" action="${PATH}usuario/salva" method="post" class="form-horizontal form-padding" role="form">
     <c:if test="${not empty entity.id}">
         <input type="hidden" name="entity.id" value="${entity.id}"/>
         <input type="hidden" name="_method" value="put"/>
@@ -11,26 +11,26 @@
     <div class="form-group">
         <label for="nome" class="col-sm-2 control-label">Nome</label>
         <div class="col-sm-3">
-            <input type="text" maxlength="100" name="entity.nome" value="${fn:escapeXml(entity.nome)}" class="form-control" id="nome" placeholder="Informe o nome do usuário">
+            <input type="text" maxlength="100" name="entity.nome" value="${fn:escapeXml(entity.nome)}" class="form-control required" id="nome" placeholder="Informe o nome do usuário">
         </div>
     </div>
     <div class="form-group">
         <label for="login" class="col-sm-2 control-label">Login</label>
         <div class="col-sm-3">
-            <input type="text" maxlength="50" name="entity.login" value="${fn:escapeXml(entity.login)}" class="form-control" id="login" placeholder="Informe o login do usuário">
+            <input type="text" maxlength="50" name="entity.login" value="${fn:escapeXml(entity.login)}" class="form-control required" id="login" placeholder="Informe o login do usuário">
         </div>
     </div>
     <div class="form-group">
         <label for="senha" class="col-sm-2 control-label">Senha</label>
         <div class="col-sm-3">
-            <input type="password" name="entity.senha" value="" class="form-control" id="senha" placeholder="Informe a senha do usuário">
+            <input type="password" minlength="6" name="entity.senha" value="" class="form-control required" id="senha" placeholder="Informe a senha do usuário">
         </div>
     </div>
     <div class="form-group">
         <label for="perfil" class="col-sm-2 control-label">Perfil</label>
         <div class="col-sm-3">
-            <select class="form-control" id="perfil" name="entity.perfil.id">
-                <option>- SELECIONE -</option>
+            <select class="form-control required" id="perfil" name="entity.perfil.id">
+                <option value="">- SELECIONE -</option>
                 <c:forEach items="${perfis}" var="p">
                     <c:set var="selected" value="${p.id eq entity.perfil.id ? 'selected' : ''}"/>
                     <option value="${p.id}" ${selected}>${p.nome}</option>
@@ -61,4 +61,5 @@
 
 <script type="text/javascript">
     activeMenu("#menu-usuarios");
+    validateForm('#form-usuario');
 </script>

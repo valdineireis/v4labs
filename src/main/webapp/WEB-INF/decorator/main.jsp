@@ -31,6 +31,8 @@
 
         <script src="<c:url value="/js/jquery.min.js"/>"></script>
         <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+        <script src="<c:url value="/js/jquery.validate.min.js"/>"></script>
+        <script src="<c:url value="/js/messages_pt_BR.min.js"/>"></script>
         <script src="<c:url value="/js/application.js"/>"></script>
     </head>
     <body>
