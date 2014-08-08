@@ -73,11 +73,10 @@ public class HomeController {
      * This method only accept POST requests
      * @param login
      * @param password
-     * @param remember
      * @param redirectUrl
      */
     @Post
-    public void login(String login, String password, boolean remember, String redirectUrl) {
+    public void login(String login, String password, String redirectUrl) {
         // search for the user in the database
         final Usuario dbUser = dao.busca(login, password);
 
