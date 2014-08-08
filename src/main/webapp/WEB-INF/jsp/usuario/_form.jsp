@@ -17,15 +17,26 @@
     <div class="form-group">
         <label for="login" class="col-sm-2 control-label">Login</label>
         <div class="col-sm-3">
-            <input type="text" maxlength="50" name="entity.login" value="${fn:escapeXml(entity.login)}" class="form-control required" id="login" placeholder="Informe o login do usuário">
+            <c:choose>
+                <c:when test="${empty entity.id}">
+                    <input type="text" maxlength="50" name="entity.login" value="${fn:escapeXml(entity.login)}" class="form-control required" id="login" placeholder="Informe o login do usuário">
+                </c:when>
+                <c:otherwise>
+                    <p class="form-control-static">${fn:escapeXml(entity.login)}</p>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
-    <div class="form-group">
-        <label for="senha" class="col-sm-2 control-label">Senha</label>
-        <div class="col-sm-3">
-            <input type="password" minlength="6" name="entity.senha" value="" class="form-control required" id="senha" placeholder="Informe a senha do usuário">
+        
+    <c:if test="${empty entity.id}">
+        <div class="form-group">
+            <label for="senha" class="col-sm-2 control-label">Senha</label>
+            <div class="col-sm-3">
+                <input type="password" minlength="6" name="entity.senha" value="" class="form-control required" id="senha" placeholder="Informe a senha do usuário">
+            </div>
         </div>
-    </div>
+    </c:if>
+    
     <div class="form-group">
         <label for="perfil" class="col-sm-2 control-label">Perfil</label>
         <div class="col-sm-3">

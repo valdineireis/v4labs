@@ -63,7 +63,17 @@ public class UsuarioController {
     }
     
     @Put("/usuario/salva")
-    public void atualiza(@NotNull @Valid Usuario entity) {
+    public void atualiza(Usuario entity) {
+        // Busca as informacoes cadastradas anteriormente
+        Usuario usuarioAntigo = dao.buscarPorId(entity.getId());
+        
+        // Adiciona as informacoes que nao devem ser atualizadas no objeto atual
+        entity.setLogin(usuarioAntigo.getLogin());
+        entity.setSenha(usuarioAntigo.getSenha());
+        entity.setSalt(usuarioAntigo.getSalt());
+        
+        // Efetua a validacao
+        validator.validate(entity);
         validator.onErrorRedirectTo(this).edita(entity.getId());
         
         try {
